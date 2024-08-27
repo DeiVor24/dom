@@ -1,6 +1,6 @@
 /**
  * Gautas tekstas yra performatuojamas taip, jog visos raides tampa mazosios isskyrus pirmos tampa didziosiomis.
- * @param {string} str Tekstas. 
+ * @param {string} str Tekstas.
  * @example
  * // returns 'Labas'
  * capitalize('labas');
@@ -10,11 +10,6 @@
  * @returns Performatuotas tekstas.
  */
 export function capitalize(str) {
-    // labas -> Labas
-    // LABAS -> Labas
-    // labas rytas -> Labas Rytas
-    // LABAS RYTAS -> Labas Rytas
-
     return str
         .split(' ')
         .map(word =>

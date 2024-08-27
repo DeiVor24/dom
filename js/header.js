@@ -1,22 +1,74 @@
-const headerListDOM = document.getElementsByTagName('header');
+/**
+ * Sugeneruoja <header> elemnto html ir istato i DOM 
+ * @param {string} currentHref  norimos pazymeti nuorodos "href" reiksme
+ */ 
 
-if (headerListDOM.length === 0 ) {
-    console.error('Nepavyko rasti "header" elemento');    
-}else {
-    const headerDOM = headerListDOM[0];
-    const headerHTML =`
-           <header>
-                    <img src="../header/img/Screenshot 2024-08-26 072905.png" alt="logo">
-                    <nav>
-                        <a id="home" href="../index.html">Home</a>
-                        <a id="Services" href="../header/services/index.html">Services</a>
-                        <a id="About"href="../header/About/index.html">About</a>
-                        <a id="contact"href="../header/Contact us/index.html">Contact us</a>
-                    </nav>
-            </header>`
-    
+export function header(currentHref) {
+    const navData = [
+        {
+            href: '',
+            text: 'Pagrindinis',
+        },
+        {
+            href: 'services',
+            text: 'Paslaugos',
+        },
+        {
+            href: 'team',
+            text: 'Komanda',
+        },
+        {
+            href: 'basketball',
+            text: 'Krepšinis',
+        },
+        {
+            href: 'snake',
+            text: 'Gyvatele',
+        },
+    ];
 
-    headerDOM.innerHTML = headerHTML;
+    let navHTML = '';
+
+    for (const link of navData) {
+        let classes = '';
+
+        if (currentHref === link.href) {
+            classes = 'link active';
+        } else {
+            classes = 'link';
+        }
+
+        navHTML += `<a class="${classes}" href="../${link.href}">${link.text}</a>`;
+    }
+
+    const headerHTML = `
+        <header class="header">
+            <img class="logo" src="../logo.png" alt="logo">
+            <nav class="nav">${navHTML}</nav>
+        </header>`;
+
+    document.body.insertAdjacentHTML('afterbegin', headerHTML);
 }
 
-console.log(headerDOM);
+export function header2(currentHref) {
+    const data = [
+        { href: '', text: 'Pagrindinis' },
+        { href: 'services', text: 'Paslaugos' },
+        { href: 'team', text: 'Komanda' },
+    ];
+
+    const linkHTML = [];
+
+    for (const { href, text } of data) {
+        linkHTML.push(
+            `<a class="link ${currentHref === href ? 'active' : ''}" href="../${href}">${text}</a>`
+        );
+    }
+
+    const HTML = `<header class="header">
+            <img class="logo" src="../logo.png" alt="logo">
+            <nav class="nav">${linkHTML.join('')}</nav>
+        </header>`;
+
+    document.body.insertAdjacentHTML('afterbegin', HTML);
+}
